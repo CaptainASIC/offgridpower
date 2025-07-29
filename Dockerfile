@@ -21,9 +21,9 @@ RUN pnpm run build
 # Install serve to serve the built application
 RUN npm install -g serve
 
-# Expose port 3000
-EXPOSE 3000
+# Expose the port that Railway will assign
+EXPOSE $PORT
 
-# Start the application
-CMD ["serve", "-s", "dist", "-l", "3000"]
+# Start the application on Railway's assigned port
+CMD ["sh", "-c", "serve -s dist -l ${PORT:-3000}"]
 
